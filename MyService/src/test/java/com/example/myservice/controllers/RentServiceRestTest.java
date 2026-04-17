@@ -39,27 +39,12 @@ public class RentServiceRestTest {
 
     @Test
     public void testGetCars() throws Exception {
-        // Ajouter une voiture d'abord
-        Car car1 = new Car("ABC123", "Toyota", 15000.0);
-        ObjectMapper objectMapper = new ObjectMapper();
-        mockMvc.perform(post("/cars")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(car1)));
-        
         mockMvc.perform(get("/cars"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void testGetCarByPlateNumber() throws Exception {
-        Car car = new Car("ABC123", "Toyota", 15000.0);
-        ObjectMapper objectMapper = new ObjectMapper();
-        
-        // Ajouter une voiture d'abord
-        mockMvc.perform(post("/cars")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(car)));
-        
         mockMvc.perform(get("/cars/ABC123"))
                 .andExpect(status().isOk());
     }
